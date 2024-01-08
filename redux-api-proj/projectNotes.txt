@@ -1,0 +1,7 @@
+//---Steps used in createnig Redux-api-project
+
+*npx create-react-app redux-api-proj --template redux
+*renaming files and folders according to our project
+*removing all the uneccerssay data
+
+*install and import axios

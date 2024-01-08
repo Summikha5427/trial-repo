@@ -1,0 +1,251 @@
+
+Redux Libraries:
+
+  *Redux
+  *React-Redux
+  *Redux-thunk
+  *Redux-Toolkit - Mainly used
+  *RTK Query - used with Redux- Toolkit
+  *Redux Saga
+
+Redux Concepts/Terms : Very important to inderstand
+Redux with React - how Redux is works with React /  What are the Problems and how they are Solved
+Redux- ToolKit with React : smaller code and helps to solve the problems 
+RTK Query - A Library for Fetching the API 
+MiniProject - with ATK async Thunk (Flexible)
+Redux Saga - Only for those whose Companies uses SAGA otherwise  not Recommended
+
+Course Page- All assignments and FullStack avaiable 
+
+  What is Redux?
+    *A Pattern:Redux is a Pattern used to work Sequentially 
+    *A library: it contailns multiple Libraries
+    *it helps in Avoiding Prop-drilling and communication with components globally or locally including state-lifting
+    *Independent of Framworks - It is Independent of any FrameWork 
+        Though it is used with React but it is purely independant and can be used anywhere 
+        with any application like Front,backEnd , mobile and Web-application
+    *State Management in JS: manages states with any level of JS
+
+  Why Redux?
+    Transfering updated state variable in Eact is difficult which is acheived with the Help of prop - drilling
+    Redux reduces the problem of communication with different Components on the same leve(within Sibling)
+*Lifting State: In react to communicate with a sibling you have to use prop drilling like have to send it to the parent to communicate with the other sibling
+*Global State: donward data is easy but still have prop drilling Problems
+*Redux soleves the problem of communication and the Prop drilling 
+  by providing a Global store redux library which gives access from anywhere 
+*Patterns will be provided by redux which helps in updating and access
+
+When to use Redux?
+  *Big application
+  *High freqeuncy of StateChange(dont use with small components, read only , low frequency of state chnge Projects)
+
+Redux Pattern:
+  Eg: Bank 
+        Action: deposit
+                withdraw
+                Check Balance
+        Reducer: prev state + Action
+        Store: Redux has a store which keeps all the state , procedures and formulas etc.,
+        State: information 
+        Action = type (description) + Payload(Extra inofrmation)
+                  Action doesn't change the state directly, it goes to the formula (Reducer)
+                  and gets the new state
+         dispatch : disptach is the one who sends the action to the reducer . It takes place in the Store of the Redux
+
+            => dispatch , state , Reducer  all three happens in the Redux Store .
+                => Action is created by the developer
+CORE:
+MiddleWare: 
+    what if the action is not direct to the sTore .
+    have to go through different middleware. 
+
+    Middleware gives the succes or the fialure as a Action 2
+    Due to Middle ware the  the performance complexity increases but it enhances the 
+      the different complex middleware if nedded in between.
+
+Redux Libraby: 
+
+
+...ES6
+
+    Indicating the Type in the package.json to use the ES6 
+     => By including "type": "module", 
+        you ensure that Node.js treats your code as 
+        ES modules and allows you to use ES module 
+        syntax and features. This is especially important
+        when working with modern JavaScript code and 
+        libraries that rely on ES modules.
+
+        
+//Principles of REdux:
+
+    *Single Source of truth (global Store)
+    *IMMUTABLE updates (Don't change the state directly)
+    *Reducer SHould be Pure
+
+//THUNK - middleware
+    =>installa and import to use it
+    *In Redux, a thunk middleware is a middleware that allows you to write action creators that return "functions" instead of plain action objects. This is particularly useful when you need to perform asynchronous operations, such as making API calls, before dispatching an action. Thunks provide a way to delay the dispatch of an action until a later time, usually after an asynchronous operation has completed.
+
+Here's how thunks work in Redux:
+
+1. **Action Creators**: Instead of returning a plain action object, thunk action creators return a function. This function takes two parameters: `dispatch` and `getState`. `dispatch` is used to dispatch actions, and `getState` is used to access the current state of the Redux store.
+
+   ```javascript
+   const fetchUser = (userId) => {
+     return (dispatch, getState) => {
+       // You can perform asynchronous operations here
+       fetch(`/api/users/${userId}`)
+         .then((response) => response.json())
+         .then((data) => {
+           // Dispatch an action when the data is ready
+           dispatch({ type: 'FETCH_USER_SUCCESS', payload: data });
+         })
+         .catch((error) => {
+           dispatch({ type: 'FETCH_USER_FAILURE', payload: error });
+         });
+     };
+   };
+   ```
+
+2. **Dispatching Thunks**: When you dispatch a thunk action creator, Redux middleware (such as Redux Thunk middleware) intercepts it and invokes the function with the `dispatch` and `getState` parameters.
+
+   ```javascript
+   // Dispatching the thunk action creator
+   store.dispatch(fetchUser(123));
+   ```
+
+3. **Async Operations**: Inside the thunk function, you can perform asynchronous operations, like fetching data from an API. Once the asynchronous operation is complete, you can dispatch regular actions to update the Redux store.
+
+   In the example above, the `fetchUser` thunk fetches user data asynchronously and dispatches either a success or failure action based on the result.
+
+Thunk middleware is a popular choice for handling asynchronous actions in Redux because it provides a straightforward way to manage async code while keeping the action creators and reducers pure. It allows you to decouple the timing of actions from the async operations themselves, making it easier to test and reason about your application's behavior.
+
+It seems like you're asking about the differences between simple functions and reducer functions, their outputs, benefits, and use cases. Let me explain:
+
+//-----------------**Simple Functions**:
+
+1. **Definition**: Simple functions are basic functions in programming that take input, perform a specific task or computation, and return a result. They are often used for tasks like calculations, data processing, and transformations.
+
+2. **Outputs**: Simple functions typically return a single value or result based on the input provided. For example, a simple function to calculate the square of a number takes a number as input and returns its square.
+
+3. **Benefits**: Simple functions are easy to understand, test, and maintain. They promote code modularity by encapsulating specific operations, making the code more readable and reusable.
+
+4. **Use Cases**: Simple functions are used for a wide range of tasks, such as arithmetic calculations, string manipulation, date formatting, and many other common programming tasks.
+
+**Reducer Functions**:
+1. **Definition**: Reducer functions are commonly used in functional programming and are typically used to reduce a collection of values (such as an array) into a single result. They involve an accumulation process where an initial value is combined with each element of the collection to produce a final result.
+
+2. **Outputs**: Reducer functions typically return a single aggregated value, such as the sum of all elements in an array, the maximum value, or even a transformed data structure.
+
+3. **Benefits**: Reducer functions are powerful for performing complex operations on collections. They are often used for tasks like calculating totals, finding maximum or minimum values, filtering data, and more. They promote a declarative and functional programming style, making code more concise and expressive.
+
+4. **Use Cases**: Reducer functions are commonly used in scenarios where you need to process and summarize data from a collection, such as calculating averages, counting occurrences, and aggregating data in databases.
+
+In summary, the main differences between simple functions and reducer functions lie in their purpose, outputs, and use cases. Simple functions are versatile and used for various tasks, while reducer functions specialize in aggregating data from collections, making them particularly useful for complex data manipulation tasks.
+
+//----Basic Part Summary :
+
+  Store:
+      Store has 3 fucntions:
+        State : get acceses to states in store
+        Reducer: Reducer helps in creating the Stores
+        dispatch: request for an action
+
+  Action :
+          Action is a Simple object which is created by the developer which consists of
+          {type:'',payload:''}; might also include extra things like 'error'
+
+  State:
+    State is a object which is like a Nested Tree Json object whose depth of getting nested depends on the reducer created
+    State can become complex and leads to reducers increasing
+        {
+          "amount" : 777,
+          "id" : 5
+        }
+
+State is accesible and get the global state of the store using "getState"
+to communicate with the Store an "Action" has to be send through "disptach" to "Reducer"
+   if any middleAre is not present 
+    Otherwise the action passes through the MiddleWare to the reducer to Perforn the action in the store
+
+Reducer:
+  The Reducer then accepts the action call with "State" and the "action" and returns back the new State.
+  Now the Store has the new State
+
+  eg:  fucntion ReducerName(state,action){
+       if(action.type === "deposit"){
+        return state.amount + 1 ;
+       }
+  }
+
+---------------REACT - REDUX 
+
+*Making a Global State to the Redux(Provider):
+  A store is implemented at the top of the App Level (Globsl State)
+    due to which the Store is accessible to the whole application
+  
+*Accessing Global State From React:
+  useSelector Hook: Helps us Avoiding the prop-drilling
+                    not only accessing the State but also the react behaves as if it is State only like "Mapping"
+
+*Changing State from anywhere:
+  useDispatch: 
+    
+-----Ex: With an example of chapter 2 code provided by coder - Dost 
+      go through once
+      after going it through now we are aiming to ligt the state(i.e; we want to see the output from the child state(Account,Bonus) into the parent state(App)
+      so we will be using react-redux to make it easy lifting up the state rather than using prop drilling as it becomes more complex to code as the props might keeps on increasing according to the appplications
+
+-----React - Reduc (practical)
+  npm i redux-react
+  in the main "index.js" provide
+     <React.StrictMode>
+       <Provider store = {store}>  // Here {store} is the Fixed name , where as store is the given name 
+                                      using provider library by redux-react we are allowing the whole store to the the complete application.
+                                      So that any child from any nested level can use the the store and its two properties,
+                                        => i.e; dispatch(useDispatch is the hook) to perform and action to change the State
+                                           and  getState(useSelector is the hook) to get the value of the state from any selected State
+         <App />
+      </Provider>
+    </React.StrictMode>
+
+By using redux-react, The value in both the libraries (redux,react) is updated.
+After applyinh redux . the update will be performed in the reduc to which react will not respond.
+As in the react libray react can only update when the state of the react is changed,
+we have to combine both so that once the changes are done in redux it should also affect the react at the same time.
+
+the benifit of usinf redux-react is they both are attahced so state of them is acted same
+
+
+------Redux-Devtool:
+  Downloaded Redux Toolkit for Google Chrome- which in return helps in 
+  debugging.
+
+@inIt: Alwys there when we start the redux devTool.
+
+
+//-----Slice has a problem .Like one complent cannot be affected by another.
+we have to use "ExtrsReducers" sectioj to have effect of one component onto another
+
+------Redux- Async thunk:
+I din't understood it fully.. but hopefully work on it later
+
+-----RTK-Query:
+
+A tool which has multiple features which other middlwares or tools.
+
+It used not only for APi calling but with more advance features like:
+  Polling and caching..
+
+RTK Query is not directly realated to 'React'
+but we have to give it a connection.
+
+Rtk Query is a combination of createSlice and Aync thunk which help us to get the data from caching(Storage) and not to jump on network again and agin to fetch the data.
+
+We are using our file db.json . on the account data . we will be perform CRUD operation using RTK Query APi calls.
+
+Lets start coding..
+
+
+
